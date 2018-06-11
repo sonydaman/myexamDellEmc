@@ -1,0 +1,81 @@
+extends layout
+
+block content
+  .container(ng-app='myApp', ng-controller='numberCtrl')
+      .row
+        .col-lg-12
+          .row
+            h3.text-center MY EXAM IN MEAN STACK 
+            p.form-control
+              span.pull-left Add Numbers Form 
+              span.pull-right Records
+              .row
+                .col-lg-12
+                  .alert.alert-success(ng-show="msgSucc")
+                        strong(ng-bind='msgSucc')
+                  .alert.alert-danger(ng-show="msgErr")
+                        strong(ng-bind='msgErr')
+                .col-md-6
+                  .row
+                    .col-lg-9
+                      h3 Number Form
+                        span.glyphicon.glyphicon-plus
+                    .col-lg-12
+                      hr
+                    div
+                      form.form-horizontal(name='myForm', novalidate='')
+                        .form-group.has-feedback(ng-class="{'has-error': myForm.number1.$error.required || myForm.number1.$error.dirty || myForm.number1.$invalid || myForm.number1.$error.min,'has-success': !myForm.number1.$error.required || !myForm.number1.$error.dirty || !myForm.number1.$invalid || !myForm.number1.$error.min }" )
+                          lable.col-sm-2.control-label( for="number1") Number 1 : 
+                          .col-sm-6
+                            input.form-control(placeholder="Enter number here",type='number', name='number1', ng-model='number1', required='' min="0" ng-class="{'text-error': myForm.number1.$invalid && myForm.number1.$dirty,'text-success': !myForm.number1.$error.required && !myForm.number1.$error.required && !myForm.number1.$error.min }" )
+                            span.glyphicon.glyphicon-remove.form-control-feedback(ng-show='myForm.number1.$error.required || myForm.number1.$error.dirty || myForm.number1.$invalid || myForm.number1.$error.min')
+                            span.glyphicon.glyphicon-ok.form-control-feedback(ng-show='!myForm.number1.$error.required && !myForm.number1.$error.dirty && !myForm.number1.$error.min')
+                          .col-sm-4
+                            span(ng-show='myForm.number1.$error.required') Number is required.
+                            span(style="color:red" ng-show="myForm.number1.$error.number") Must be number!
+                            span(style="color:red" ng-show="myForm.number1.$error.min") Number should Be greater then 0
+                        .form-group.has-feedback(ng-class="{'has-error': myForm.number2.$error.required || myForm.number2.$error.dirty || myForm.number2.$invalid || myForm.number2.$error.min,'has-success': !myForm.number2.$error.required || !myForm.number2.$error.dirty || !myForm.number2.$invalid || !myForm.number2.$error.min }" )
+                          lable.col-sm-2.control-label( for="number2") Number 2 :  
+                          .col-lg-6
+                            input.form-control(placeholder="Enter number here",type='number', name='number2', ng-model='number2', required='',min="0" ng-class="{'text-error': myForm.number2.$invalid && myForm.number2.$dirty,'has-success': !myForm.number2.$error.required && !myForm.number2.$error.required && !myForm.number2.$error.max && !myForm.number2.$error.min }"   )
+                            span.glyphicon.glyphicon-remove.form-control-feedback(ng-show='myForm.number2.$error.required || myForm.number2.$error.dirty || myForm.number2.$invalid || myForm.number2.$error.min')
+                            span.glyphicon.glyphicon-ok.form-control-feedback(ng-show='!myForm.number2.$error.required && !myForm.number2.$error.dirty && !myForm.number2.$error.min')
+                          .col-sm-4
+                            span(ng-show='myForm.number2.$error.required') Number is required.
+                            span(style="color:red" ng-show="myForm.number2.$error.number") Must be number!
+                            span(style="color:red" ng-show="myForm.number2.$error.min") Number should be greater then 0
+                        .form-group
+                          lable.col-sm-2.control-label( for="result") Result :
+                          .col-sm-8(style="padding-top: 5px;")
+                            strong(ng-bind='result || "---" ')
+                        button.btn.btn-sm-3.btn-primary(type='submit'
+                              ng-click="submitData()"
+                              ng-disabled='(myForm.number1.$error.required || myForm.number1.$error.dirty || myForm.number1.$invalid || myForm.number1.$error.min || \
+                                          myForm.number2.$error.required || myForm.number2.$error.dirty || myForm.number2.$invalid || myForm.number2.$error.min) ') Calculate
+                .col-md-6
+                  .row
+                    .col-lg-9
+                      h3 Number list with filtering data 
+                    .col-lg-3
+                      input.form-control.pull-right(ng-model='myfilter', name='searchText', placeholder='Serach Here')
+                    .col-lg-12
+                      hr
+                    table.table.table-striped
+                      thead
+                        tr
+                          th SrNo.
+                          th Number 1
+                          th Number 2
+                          th Result
+                      tbody
+                        tr(ng-repeat='x in names | filter:myfilter')
+                          td {{ names.length - $index }}
+                          td {{ x.num1}}
+                          td {{ x.num2}}
+                          td {{x.result }}
+                                         
+                
+    footer
+      section
+        p.text-center
+          | Copyright  sonydaman @2018
