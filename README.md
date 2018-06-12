@@ -6,7 +6,7 @@ Steps to install :
 	1.) clone repo -> git clone https://github.com/sonydaman/myexamDellEmc.git
 	2.) cd myexamDellEmc
 	3.) npm install
-	4.) import Db(dellemc.sql) in your system.
+	4.) import Db(dellemc.sql) in your system.Update mysql credetial on config.js (myexamDellEmc/routes/database/config.js)
 	5.) Run Mysql database.
 	6.) npm start
 	7.) open browser hit url : localhost:3000
